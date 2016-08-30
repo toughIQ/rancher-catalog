@@ -8,7 +8,7 @@ db01:
     MYSQL_PASSWORD: "${mysql_password}"
   labels:
     io.rancher.container.pull_image: always
-    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/db02,io.rancher.stack_service.name=$${stack_name}/db03
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${serivce_name},io.rancher.stack_service.name=$${stack_name}/$${serivce_name}
   command:
   - --wsrep-new-cluster
   hostname: db01
