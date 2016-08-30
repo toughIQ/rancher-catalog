@@ -10,3 +10,9 @@
       default: "mariadb-cluster"
       required: true
       type: string 
+    - variable: maxscale_public_port
+      label: "Public Port for MaxScale to listen on"
+      description: "This port is exposed to the public by MaxScale"
+      default: "3306"
+      required: true
+      type: int 
