@@ -4,12 +4,26 @@
   description: "MariaDB-Cluster based on MariaDB 10.1"
   minimum_rancher_version: v1.1.0
   questions:
-    - variable: rancher_stack_name
-      label: "Rancher Stack Name"
-      description: "Must match the Rancher Stack Name of the Service to ensure proper DNS resolution in config."
-      default: "mariadb-cluster"
+    - variable: "mysql_root_password"
+      type: string
       required: true
-      type: string 
+      label: "MySQL Root Password"
+      description: "Password for MySQL Root User"
+    - variable: "mysql_database"
+      type: string
+      required: true
+      label: "MySQL Database Name"
+      description: "Create MySQL Database"
+    - variable: "mysql_user"
+      type: string
+      required: true
+      description: "Create MySQL User"
+      label: "MySQL DB User"
+    - variable: "mysql_password"
+      type: string
+      required: true
+      label: "MySQL DB Password"
+      description: "Password for MySQL User"
     - variable: maxscale_public_port
       label: "Public Port for MaxScale to listen on"
       description: "This port is exposed to the public by MaxScale"
