@@ -1,1 +1,1 @@
-# Rancher Catalog Definition
+# Rancher Catalog by toughIQ
