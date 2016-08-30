@@ -16,3 +16,20 @@
       default: "3306"
       required: true
       type: int 
+
+db01:
+  scale: 1
+db02:
+  scale: 1
+db03:
+  scale: 1
+maxscale:
+  scale: 1
+  health_check:
+    port: ${maxscale_public_port}
+    interval: 2000
+    initializing_timeout: 60000
+    unhealthy_threshold: 3
+    strategy: recreate
+    healthy_threshold: 2
+    response_timeout: 2000
