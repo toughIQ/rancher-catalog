@@ -1,41 +1,44 @@
 db01:
   environment:
-    CLUSTER_MEMBERS: db01.$${stack_name},db02.$${stack_name},db03.$${stack_name}
-    RANCHER_STACK: $${stack_name}
+    CLUSTER_MEMBERS: db01.${RANCHER_STACK},db02.${RANCHER_STACK},db03.${RANCHER_STACK}
     MYSQL_ROOT_PASSWORD: "${mysql_root_password}"
     MYSQL_DATABASE: "${mysql_database}"
     MYSQL_USER: "${mysql_user}"
     MYSQL_PASSWORD: "${mysql_password}"
   labels:
     io.rancher.container.pull_image: always
-    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${serivce_name}
+<<<<<<< d6d343a9b639f250f32c78b3e82143269cddfd7c
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=${RANCHER_STACK}/db02,io.rancher.stack_service.name=${RANCHER_STACK}/db03
+=======
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${serivce_name},io.rancher.stack_service.name=$${stack_name}/$${serivce_name}
+>>>>>>> d7cfcb709508daaca1792d5b736272adfed5f7a8
   command:
   - --wsrep-new-cluster
   hostname: db01
   image: toughiq/mariadb-cluster:rancher
 db02:
   environment:
-    CLUSTER_MEMBERS: db01.$${stack_name},db02.$${stack_name},db03.$${stack_name}
-    RANCHER_STACK: $${stack_name}
+    CLUSTER_MEMBERS: db01.${RANCHER_STACK},db02.${RANCHER_STACK},db03.${RANCHER_STACK}
+    RANCHER_STACK: ${RANCHER_STACK}
   labels:
     io.rancher.container.pull_image: always
-    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/db01,io.rancher.stack_service.name=$${stack_name}/db03
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=${RANCHER_STACK}/db01,io.rancher.stack_service.name=${RANCHER_STACK}/db03
   image: toughiq/mariadb-cluster:rancher
   hostname: db02
 db03:
   environment:
-    CLUSTER_MEMBERS: db01.$${stack_name},db02.$${stack_name},db03.$${stack_name}
-    RANCHER_STACK: $${stack_name}
+    CLUSTER_MEMBERS: db01.${RANCHER_STACK},db02.${RANCHER_STACK},db03.${RANCHER_STACK}
+    RANCHER_STACK: ${RANCHER_STACK}
   labels:
     io.rancher.container.pull_image: always
-    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/db01,io.rancher.stack_service.name=$${stack_name}/db02
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=${RANCHER_STACK}/db01,io.rancher.stack_service.name=${RANCHER_STACK}/db02
   image: toughiq/mariadb-cluster:rancher
   hostname: db03
 maxscale:
   ports:
   - ${maxscale_public_port}:3306/tcp
   environment:
-    BACKEND_SERVER_LIST: db01.$${stack_name},db02.$${stack_name},db03.$${stack_name}
+    BACKEND_SERVER_LIST: db01.${RANCHER_STACK},db02.${RANCHER_STACK},db03.${RANCHER_STACK}
   labels:
     io.rancher.container.pull_image: always
   image: toughiq/maxscale

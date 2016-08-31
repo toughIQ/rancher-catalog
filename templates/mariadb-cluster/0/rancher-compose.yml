@@ -1,6 +1,6 @@
 .catalog:
   name: MariaDB-Cluster
-  version: v2.0 
+  version: v1.0 
   description: "MariaDB-Cluster based on MariaDB 10.1"
   minimum_rancher_version: v1.1.0
   questions:
