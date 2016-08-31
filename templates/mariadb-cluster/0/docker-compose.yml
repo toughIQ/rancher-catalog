@@ -38,7 +38,7 @@ maxscale:
   image: toughiq/maxscale
 max-lb:
   ports:
-  - 3306:3306/tcp
+  - ${maxscale_public_port}:3306/tcp
   labels:
     io.rancher.scheduler.global: 'true'
   image: rancher/load-balancer-service
