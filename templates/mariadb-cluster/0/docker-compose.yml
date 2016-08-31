@@ -8,7 +8,7 @@ db01:
   labels:
     io.rancher.container.pull_image: always
     io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=${RANCHER_STACK}/db02,io.rancher.stack_service.name=${RANCHER_STACK}/db03
-   command:
+  command:
   - --wsrep-new-cluster
   hostname: db01
   image: toughiq/mariadb-cluster:rancher
