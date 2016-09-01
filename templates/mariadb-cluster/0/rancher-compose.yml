@@ -28,12 +28,6 @@
       label: "MySQL DB Password"
       description: "Password for MySQL User"
       default: "mypass"
-    - variable: maxscale_public_port
-      label: "Public Port for MaxScale to listen on"
-      description: "This port is exposed to the public by MaxScale"
-      default: "3306"
-      required: true
-      type: int 
 
 db01:
   scale: 1
@@ -49,14 +43,5 @@ maxscale:
     initializing_timeout: 60000
     unhealthy_threshold: 3
     strategy: recreate
-    healthy_threshold: 2
-    response_timeout: 2000
-max-lb:
-  load_balancer_config:
-    haproxy_config: {}
-  health_check:
-    port: 42
-    interval: 2000
-    unhealthy_threshold: 3
     healthy_threshold: 2
     response_timeout: 2000
