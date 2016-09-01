@@ -31,12 +31,16 @@
 
 db01:
   scale: 1
+  retain_ip: true
 db02:
   scale: 1
+  retain_ip: true
 db03:
   scale: 1
+  retain_ip: true
 maxscale:
   scale: 1
+  retain_ip: true
   health_check:
     port: 3306
     interval: 2000
