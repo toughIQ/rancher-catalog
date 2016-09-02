@@ -43,7 +43,7 @@
       type: int
       required: true
       label: "Backup Keep Time"
-      descripton: "Days to keep backup files"
+      description: "Days to keep backup files"
       default: "3"
     - variable: "sleep_time"
       type: "string"
