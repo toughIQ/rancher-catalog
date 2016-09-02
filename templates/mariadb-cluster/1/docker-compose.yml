@@ -33,7 +33,7 @@ db03:
 maxscale:
   environment:
     BACKEND_SERVER_LIST: db01,db02,db03
-    ENABLE_ROOT_USER: 1
+    ENABLE_ROOT_USER: ${maxscale_enable_root}
   labels:
     io.rancher.container.pull_image: always
   image: toughiq/maxscale

@@ -31,8 +31,8 @@
     - variable: "maxscale_enable_root"
       type: boolean
       label: "Enable MaxScale Root DB Access"
-      description: "If checked, MaxScale will allow root login to the DB"
-      default: FALSE
+      description: "If unchecked, DB backup wont work. For the moment"
+      default: TRUE
     - variable: "backup_dir"
       type: string
       required: true
