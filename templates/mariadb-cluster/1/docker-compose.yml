@@ -49,7 +49,7 @@ backup:
   - /bin/sh
   - -c
   command:
-  - while true;  do /backupdb.sh; sleep ${sleep_time}; done
+  - sleep 60; while true;  do /backupdb.sh; sleep ${sleep_time}; done
   image: toughiq/mariadb-cluster:rancher
   volumes:
   - ${backup_dir}:/backup

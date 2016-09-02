@@ -30,7 +30,7 @@
       default: "mypass"
     - variable: "maxscale_enable_root"
       type: boolean
-      label: Enable MaxScale Root DB Access"
+      label: "Enable MaxScale Root DB Access"
       description: "If checked, MaxScale will allow root login to the DB"
       default: FALSE
     - variable: "backup_dir"
@@ -48,8 +48,8 @@
     - variable: "sleep_time"
       type: "string"
       required: true
-      label: "Backup Intervalls"
-      description: "Intervalls in sleep notation: 5...5 seconds, 2m...2 minutes, 3h...3 hours"
+      label: "Backup Intervals"
+      description: "Intervals in sleep notation: 5...5 seconds, 2m...2 minutes, 3h...3 hours"
       default: "1h"
     
 
