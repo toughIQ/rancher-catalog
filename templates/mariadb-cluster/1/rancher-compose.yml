@@ -1,0 +1,72 @@
+.catalog:
+  name: MariaDB-Cluster
+  version: v1.1 
+  description: "MariaDB-Cluster based on MariaDB 10.1"
+  minimum_rancher_version: v1.1.0
+  questions:
+    - variable: "mysql_root_password"
+      type: string
+      required: true
+      label: "MySQL Root Password"
+      description: "Password for MySQL Root User"
+      default: "rootpass"
+    - variable: "mysql_database"
+      type: string
+      required: true
+      label: "MySQL Database Name"
+      description: "Create MySQL Database"
+      default: "mydb"
+    - variable: "mysql_user"
+      type: string
+      required: true
+      description: "Create MySQL User"
+      label: "MySQL DB User"
+      default: "myuser"
+    - variable: "mysql_password"
+      type: string
+      required: true
+      label: "MySQL DB Password"
+      description: "Password for MySQL User"
+      default: "mypass"
+    - variable: "backup_dir"
+      type: string
+      required: true
+      label: "Local Backup directory or docker volume"
+      description: "Local directory or docker volume to be mounted into backup container"
+      default: "db_backup_vol"
+    - variable: "keep_days"
+      type: int
+      required: true
+      label: "Backup Keep Time"
+      descripton: "Days to keep backup files"
+      default: "3"
+    - variable: "sleep_time"
+      type: "string"
+      required: true
+      label: "Backup Intervalls"
+      description: "Intervalls in sleep notation: 5...5 seconds, 2m...2 minutes, 3h...3 hours"
+      default: "1h"
+    
+
+db01:
+  scale: 1
+  retain_ip: true
+db02:
+  scale: 1
+  retain_ip: true
+db03:
+  scale: 1
+  retain_ip: true
+maxscale:
+  scale: 1
+  retain_ip: true
+  health_check:
+    port: 3306
+    interval: 2000
+    initializing_timeout: 60000
+    unhealthy_threshold: 3
+    strategy: recreate
+    healthy_threshold: 2
+    response_timeout: 2000
+backup:
+  scale: 1

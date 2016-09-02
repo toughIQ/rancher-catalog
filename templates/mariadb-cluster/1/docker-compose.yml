@@ -1,0 +1,54 @@
+db01:
+  environment:
+    CLUSTER_MEMBERS: db01,db02,db03
+    MYSQL_ROOT_PASSWORD: "${mysql_root_password}"
+    MYSQL_DATABASE: "${mysql_database}"
+    MYSQL_USER: "${mysql_user}"
+    MYSQL_PASSWORD: "${mysql_password}"
+  labels:
+    io.rancher.container.pull_image: always
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/db02,io.rancher.stack_service.name=$${stack_name}/db03
+  command:
+  - --wsrep-new-cluster
+  hostname: db01
+  image: toughiq/mariadb-cluster:rancher
+db02:
+  environment:
+    CLUSTER_MEMBERS: db01,db02,db03
+    RANCHER_STACK: ${RANCHER_STACK}
+  labels:
+    io.rancher.container.pull_image: always
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/db01,io.rancher.stack_service.name=$${stack_name}/db03
+  image: toughiq/mariadb-cluster:rancher
+  hostname: db02
+db03:
+  environment:
+    CLUSTER_MEMBERS: db01,db02,db03
+    RANCHER_STACK: ${RANCHER_STACK}
+  labels:
+    io.rancher.container.pull_image: always
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/db01,io.rancher.stack_service.name=$${stack_name}/db02
+  image: toughiq/mariadb-cluster:rancher
+  hostname: db03
+maxscale:
+  environment:
+    BACKEND_SERVER_LIST: db01,db02,db03
+  labels:
+    io.rancher.container.pull_image: always
+  image: toughiq/maxscale
+backup:
+  environment:
+    BACKUP_USER: root
+    BACKUP_PASS: "${mysql_root_password}"
+    BACKUP_HOST: maxscale
+    KEEP_DAYS: "${keep_days}"
+  labels:
+    io.rancher.container.pull_image: always
+  entrypoint:
+  - /bin/sh
+  - -c
+  command:
+  - while true;  do /backupdb.sh; sleep ${sleep_time}; done
+  image: toughiq/mariadb-cluster:rancher
+  volumes:
+  - ${backup_dir}:/backup
