@@ -28,6 +28,11 @@
       label: "MySQL DB Password"
       description: "Password for MySQL User"
       default: "mypass"
+    - variable: "maxscale_enable_root"
+      type: boolean
+      label: Enable MaxScale Root DB Access"
+      description: "If checked, MaxScale will allow root login to the DB"
+      default: FALSE
     - variable: "backup_dir"
       type: string
       required: true
