@@ -1,7 +1,7 @@
 name: MariaDB-Cluster
 description: |
   MariaDB Galera Cluster based on MariaDB 10.1.
-version: v1.0
+version: v1.1
 category: Databases
 maintainer: toughIQ <toughIQ@gmail.com>
 projectURL: https://github.com/toughIQ/rancher-catalog
